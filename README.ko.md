@@ -1,5 +1,6 @@
 
 Universal-Rotating-Machinery-Entanglement-Safety-Architecture
+
 문서 번호: SOMA-MOA-URM-2026-001
 소속: soma-moa (smart-system-multi-survival-architecture) 직속 독립 프로젝트
 원본 언어 조항: 본 백서의 한국어 원문이 최종 기준 원본이며, 타 언어 번역본은 참고용으로만 활용된다.
