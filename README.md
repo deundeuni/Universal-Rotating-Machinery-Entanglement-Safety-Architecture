@@ -1,110 +1,167 @@
-Universal-Rotating-Machinery-Entanglement-Safety-Architecture
+# Universal-Rotating-Machinery-Entanglement-Safety-Architecture
 
-Document ID: SOMA-MOA-URM-2026-001 v1.2
-Affiliation: soma-moa (smart-system-multi-survival-architecture) Independent Project
-Authoritative Language Provision: The Korean text of this whitepaper serves as the official authoritative original; any non-Korean translations are provided for reference purposes only.
-[Revision History]
- * v1.0 (2026-09-26) — Initial defensive publication whitepaper release and GitHub Release v1.0 finalized.
- * v1.1 (2026-09-26) — Added explicit provisions regarding legal responsibilities of implementation entities (statutory safety certification acquisition, SIL/PL functional safety verification) and FTO re-verification recommendations; refined AI copyright/equity exclusion defense (Human-in-the-Loop) notice text; aligned prior art patent families (EP1881382A2 / US8316958B2) and patent title cross-checks in Sections 7.4 and 8.3.
- * v1.2 (2026-09-27) — Following extended prior art verification, confirmed that "tool/machine-side active glove and body entanglement sensing" has been continuously patented since 1992 (including active patents such as Laguna Tools US11187378B2/US11662061B2 "glove-sensing mode"). Consequently, claims under Section 7.3 (Defensive Publication) and Section 7.4 (FTO Assertion) were withdrawn, and the whitepaper's core character was fully repositioned from "Defensive Publication" to "Prior Art Landscape Survey," with exact patent title cross-checks finalized in Section 8.3.
-[Preliminary Legal & Technical Notices]
- * AI Copyright and Equity Exclusion Defense — Multiple generative AI models were utilized as intellectual tools (Human-in-the-Loop) to assist in formalizing and structuring technical documentation in accordance with the creative conceptualization and problem definition of the human designer (deundeuni). Sole ownership of the foundational technical concepts resides exclusively with the human designer.
- * As-Is and Unintentional Omissions Notice — This whitepaper is provided on an "As-Is" basis for technical review and prior art landscape survey purposes. Unintentional omissions, typos, or unfinalized technical specifications may exist. This document reflects technical orientations at the time of release and is subject to future updates, enhancements, and empirical validation.
- * Modesty and Risk Mitigation Notice — The technology and protective architecture disclosed herein do not guarantee the absolute elimination or 100% prevention of rotating machinery accidents. This architecture is designed as a multi-layered defense system intended to achieve practical mitigation of accident risks, discourage or delay human proximity to hazard zones, and minimize harm in the event of an incident.
- * Legal Responsibility of Implementing/Commercializing Entities & FTO Re-verification Recommendation Notice — This whitepaper constitutes a disclosure of conceptual technical ideas and a prior art landscape synthesis, not a certified commercial finished product. Any subsequent developers or commercial entities attempting to fabricate or implement devices based on this architecture are strongly advised to independently re-verify the current legal status (active term, claims scope changes, etc.) of cited prior art patents (FTO re-verification), obtain required statutory safety certifications (e.g., KCs, CE, UL, OSHA compliance), and complete pre-operational testing and engineering validation prior to safe commercial deployment. Practical implementation results may differ from the conceptual descriptions herein; all obligations concerning statutory safety certification acquisition, risk assessment, and functional safety (SIL/PL) verification reside solely with the implementing and operating entity.
-Chapter 1. Overview & Scope
-1.1 Universal Rotating Machinery Safety Project Declaration
-This whitepaper is established as an independent project directly under the soma-moa master hub, serving as Project No. 1 in the Universal Series. It addresses cross-cutting risk principles that transcend specific tool or machinery classifications. This project comprehensively synthesizes the prior art landscape of the "active body proximity and entanglement detection layer" across all working environments containing rotating components—including machine tools, portable power tools, agricultural power take-off (PTO) shafts, industrial conveyors, and textile machinery—and establishes a conceptual framework for a universal safety architecture.
-1.2 Target-Agnostic Provision
-This whitepaper discloses the technical orientation of a universal safety architecture for detecting body proximity and entanglement across all rotating machinery accessible to human operators. This encompasses stationary machinery (lathes, drill presses, bench grinders), portable power tools (impact drills, hole-saw equipped drills, angle grinders), agricultural PTO shafts, conveyor rollers, textile machinery, and general industrial rotating shafts.
-1.3 Broad Upper-Level Concept Definition
-In this architecture, "body proximity and entanglement detection" is broadly defined to encompass all mechanical, electrical, optical, electromagnetic, and vibrational sensing mechanisms that detect pre-accident indicators when human tissue, clothing, gloves, or worn accessories approach hazardous zones or initiate physical restraint by rotating elements. This concept is not restricted to any single sensor element and functions as a universal active protective layer applicable to all rotating equipment.
-Chapter 2. Background & Risk Mechanisms (Accident Statistics & Failure Modes)
-2.1 Clear Separation of Risk Mechanisms
-Kickback experienced during power tool operation results from mechanical binding between the tool and the workpiece, generating axial and rotational reactive forces that cause sudden loss of operator control. Conversely, entanglement arises from direct friction or drawing-in between rotating components and the human body or worn items (gloves, sleeves, workwear), where rotational driving torque drags the operator into the machinery. This whitepaper focuses strictly on the active detection and damage mitigation architecture for entanglement, explicitly distinguishing it from kickback.
-2.2 Official Accident Database Failure Mode Analysis
-Entanglement accidents occur via identical physical mechanisms despite varying workplace environments and safety policies, as evidenced by official accident records and legal precedents:
- * OSHA Inspection #2656262 (1985, Howard Steel Company) — During I-beam drilling, an operator applying wax to a drill bit had their glove caught by the rotating bit, resulting in severe finger amputation. This demonstrates a failure where the administrative rule prohibiting gloves around rotating machinery was breached due to human factors.
- * UK HSE Case (2018, Viking Engineering) — An apprentice operator using a bench drill equipped with a spade bit suffered finger amputation when their glove snagged on the spindle. Mandatory glove wear enforced by company safety policy to prevent cuts inadvertently caused the severe entanglement incident.
- * Soto v. Powermatic Precedent — An entanglement accident during drill press operation caused two finger amputations and permanent hand function impairment. Expert testimony established that entanglement hazards and preventive safety design principles for rotating machinery had been engineered and documented as early as the 1940s.
-2.3 Structural Limitations of Administrative Policy
-The cited cases illustrate that opposing administrative policies—prohibiting gloves versus mandating gloves—both culminated in severe amputation injuries. Administrative guidelines and human vigilance alone are structurally insufficient, proving the necessity of an active technical architecture within tools and machine frames to detect proximity and pre-entanglement states to cut power automatically.
-2.4 Hierarchical Relationship with Personal Protective Equipment (PPE)
-PPE and this active safety architecture form a complementary relationship with distinct functional layers:
- * Cut-Resistant Gloves — Designed using high-strength synthetic fibers to prevent lacerations from sharp edges or materials. However, their high tensile strength increases the risk of dragging the entire hand into machinery during an entanglement event.
- * Tear-Away Gloves — Engineered products (e.g., MAPA Ultrane 527, Ansell HyFlex 11-812) designed to tear or separate under specific tensile thresholds, allowing operator escape. These function as post-event mitigation measures after entanglement has commenced.
- * Active Sensing Architecture — A pre-event prevention layer implemented on the tool and machine side to detect proximity and early-stage entanglement before severe force transmission occurs. Thus, tear-away gloves and this architecture constitute complementary lines of defense rather than competing solutions.
-Chapter 3. System Architecture & Framework
-3.1 Independent Detection Layer Configuration
-This architecture functions as an independent safety layer separated from the primary drive control unit of the machine. The body proximity detection layer monitors physical parameter shifts at the onset of physical constraint or human contact to emit emergency brake and power-off signals.
-3.2 Three-Phase State Definition and Response Framework
-The system categorizes operational states around the rotating machinery into three distinct phases:
- * Nominal Phase — The rotating element operates within standard rotational speed and torque parameters during normal machining.
- * Proximity Phase — Human tissue or worn materials cross the safety margin and enter the detection zone. Supplementary warning signals are emitted, and the braking subsystem transitions to ready status.
- * Entanglement Phase — Physical constraint or immediate contact between the rotating element and human body/clothing is detected. Primary drive power is severed, emergency braking engages, and reverse-rotation disengagement commands may be issued.
-3.3 Modular Signal Interface
-This architecture defines a modular safety signal interface standard adaptable from single-controller portable power tools to industrial Programmable Logic Controllers (PLCs) and hardwired Emergency Stop (E-Stop) circuits.
-Chapter 4. Safety Standards & Standards Alignment
-4.1 Alignment with International and Industrial Safety Standards
-This architecture aligns with existing industrial safety standards and extends traditional physical safeguarding through active electronic control:
- * OSHA 1910.212 (General requirements for all machines) — Complies with point-of-operation and rotating part guarding mandates, offering equivalent or superior electronic hazard mitigation where fixed physical guards hinder operational viability.
- * ANSI B11.19 (Performance Requirements for Risk Reduction Measures) — Incorporates standards for response time, system reliability, and sensing zone definition to ensure valid safety response during emergency stopping.
- * KOSHA GUIDE (Korea Occupational Safety and Health Agency) — Integrates with technical guidelines for rotating machinery safeguards and maintenance safety to enhance field implementation.
-4.2 Mitigating Limitations of Physical Safeguards
-Fixed physical guards often suffer from intentional removal by operators due to obstructed sightlines or material feeding restrictions. This active sensing architecture mitigates the operational drawbacks of fixed barriers while maintaining continuous electronic hazard monitoring.
-Chapter 5. Human & Organizational Factors [Reference Only]
-This chapter provides contextual background on field working conditions and human factors and does not form part of the technical claims.
-5.1 Limitations of Skilled Worker Reactions and Startle Reflex
-Even experienced operators possess inherent physiological limits in human reaction time (perceptual and neuromuscular delays) when responding to mechanical anomalies or the onset of entanglement. However, the speed at which clothing or materials are drawn in by rotating components progresses extremely rapidly. Therefore, relying solely on operator cognitive perception or experienced reflexes to avoid entanglement accidents presents clear physical limitations.
-5.2 Risk Characteristics by Glove Material
-Glove material characteristics present distinct failure modes upon contact with rotating elements:
- * Cotton and Standard Work Gloves — Surface fibers easily catch on shaft burrs or drill flutes, rapidly wrapping the material around the rotating shaft due to fiber alignment.
- * Cut-Resistant Gloves (HPPE, Aramid) — Highly resistant to cutting, but their high tensile strength prevents fabric tearing, transferring massive rotational force directly to the operator's hand and wrist, leading to severe fractures or amputations.
- * Tear-Away Gloves — Designed to separate along designated seams or coatings under specified tensile thresholds, reducing the risk of pulling the entire hand into the machine.
-Chapter 6. System Integration & Universal Scalability
-6.1 Illustrative Application Paths Across Machine Types
-This architecture presents generalized signal structure examples to facilitate the consideration of universal applicability across diverse machinery categories:
- * Stationary Machine Tools (Lathes, Drill Presses, Bench Grinders) — Can be configured to interface with spindle controllers and Variable Frequency Drives (VFDs) to trigger emergency power cutoff and active braking.
- * Portable Power Tools (Impact Drills, Hole-Saw Drills, Angle Grinders) — Illustrates integration directly with main FET/IGBT power switching circuits and electronic motor brakes.
- * Industrial & Agricultural Rotating Shafts (PTO Shafts, Conveyors, Rollers, Textile Machines) — Connects to external E-Stop modules and electro-mechanical clutches to decouple heavy drive shafts.
-6.2 Redundancy and Fail-Safe Latch Architecture
-Upon sensor disconnection, power failure, or internal module fault, the system defaults to a fail-safe condition by halting rotation or issuing warning states. Following an emergency shutdown, a safety latch prevents automatic restarting until intentional manual reset procedures are completed.
-6.3 Parallel Independent Relationship with Sister Whitepapers
-As a universal core whitepaper synthesis, this document maintains a parallel and independent position alongside sister whitepapers covering specific tool risks (e.g., NCT, grinders, lathes/milling machines). Sister whitepapers may reference and integrate this universal entanglement sensing layer as a sub-module within their specialized frameworks.
-Chapter 7. Prior Art Respect & Landscape Survey
-7.1 Prior Art Respect Declaration
-This whitepaper deeply respects established patent rights and industry innovations regarding kickback detection, torque management, mechanical clutches, and active glove/body entanglement sensing. All technical concepts cited in this whitepaper do not infringe upon the legitimate patent rights of existing patent holders and serve the purpose of citing and organizing prior disclosures.
-7.2 Prior Art Saturated Domains (High-Density Patent Zones)
-The following technical domains represent high-density patent zones that have been continuously patented from the 1990s through the present, consisting of numerous active or expired patents; they are disclaimed as primary claims and cited as prior art to be respected:
- * Glove and Body Entanglement Sensing Technologies — Laguna Tools patent family (US11187378B2, US11662061B2: safety switch activating a glove-sensing mode followed by switching to a collision-detection mode during runtime; active patents), individual patent US9936742B2 (2016, glove impedance sensing for dual-power mode switching; active until ~2036), Warwick Mills US10104923B2 (proximity-sensing gloves and interlock; expired due to fee non-payment), Marel US5160289A (1992, wireless electromagnetic signal glove sensing; expired), US7236849B2 (2004, conductive glove contact sensing; expired), EP3432782A4 (hybrid bidirectional glove/tool sensing), US12025271 (RF and capacitive material discrimination sensing), among a continuous patent family spanning from the 1990s to the present.
- * Kickback Detection Systems — DeWalt E-Clutch systems (rotational acceleration sensing), US6479958B1 (power tool kickback control during hole-saw binding), US7552781B2, and related power tool rotational motion sensing art.
- * Sensor-Based Preventive Torque Management — Hilti patent families (US9505097B2, EP2497607B1, EP2669061A1 for torque/motion sensing to infer operator grip force), Black & Decker EP1881382A2 / US8316958B2 (adaptive control for torque conditions).
- * Mechanical Torque-Limiting Clutches — Expired patents such as US4487270A (1984) covering mechanical adjustable clutch structures now in the public domain.
-7.3 Prior Art Landscape Survey
-Rather than creating a new exclusive or defensively published domain in the public sphere, this whitepaper synthesizes and presents a prior art landscape across the hazard domain of rotating machinery body and entanglement detection. It deeply respects the established rights of entities such as Laguna Tools, Warwick Mills, DeWalt, Hilti, and Black & Decker, serving as a Prior Art Landscape map to assist subsequent implementers in identifying patent density prior to development.
-7.4 High-Density Patent Zone Warning & Mandatory FTO Re-verification Notice
-The domain of active rotating machinery body and entanglement detection covered in this whitepaper is a Densely Patented Domain with numerous active patents from the 1990s to the present. Publication of this whitepaper does not guarantee Freedom to Operate (FTO), and any entity attempting practical implementation must perform independent claim-by-claim analysis and up-to-date FTO investigations through professional patent counsel. Because this whitepaper represents a conceptual synthesis of architecture, all obligations regarding implementation discrepancies, statutory safety certification acquisitions (KCs, CE, UL, OSHA, etc.) across jurisdictions, and prior art status re-verifications (FTO re-check) reside entirely with the implementing and operating entity.
-Chapter 8. Sources & References
-8.1 Accident DB & Public Records
- * Occupational Safety and Health Administration (OSHA). "Inspection #2656262 - Howard Steel Company." Inspection Record, 1985.
- * UK Health and Safety Executive (HSE). "Apprentice Finger Amputation during Drilling Operation." HSE Safety Alert & Enforcement Record, Viking Engineering Case, 2018.
- * United States Court of Appeals / Legal Records. "Soto v. Powermatic." Court Precedent & Expert Witness Testimony Records on Drill Press Safety Design Principles.
-8.2 Industrial Safety Standards & Guidelines
- * Occupational Safety and Health Administration (OSHA). "OSHA 1910.212: General requirements for all machines." Code of Federal Regulations.
- * American National Standards Institute (ANSI). "ANSI B11.19: Performance Requirements for Risk Reduction Measures: Safeguarding and Other Means of Reducing Risk."
- * Korea Occupational Safety and Health Agency (KOSHA). "KOSHA GUIDE: Technical Guidelines for Safeguards and Operation Safety of Rotating Machinery."
-8.3 Prior Art & Patent Documents
- * US Patent US5160289A — "Safety means for powered machinery" (1992, Marel, wireless electromagnetic signal glove sensing, Expired).
- * US Patent US7236849B2 — "Safety system for power equipment" (2004, conductive glove contact sensing, Expired).
- * US Patent US11187378B2 — Laguna Tools, Inc., "Power tool safety system" (2019, initial glove-sensing mode filing, active patent).
- * US Patent US11662061B2 — Laguna Tools, Inc., "Power tool safety system" (2021, continuation patent, active patent).
- * US Patent US9936742B2 — "Glove impedance sensing for dual-power mode safety control" (2016, active patent ~2036).
- * US Patent US10104923B2 — Warwick Mills, Inc., "Proximity-sensing protective gloves and tool interlock" (2017, expired due to fee non-payment).
- * European Patent EP3432782A4 — "Hybrid bidirectional sensing glove and power tool safety apparatus" (2016).
- * US Patent US12025271 — "Material discrimination sensing using RF and capacitive elements for power tools" (Recent filing, active patent).
- * US Patent US6479958B1 — "Anti-kickback and breakthrough torque control for power tool" (Home Depot / Black & Decker family, explicitly citing Hole Saw operation).
- * US Patent US7552781B2 — "Power tool anti-kickback system with rotational rate sensor" (Black & Decker Inc.).
- * US Patent US9505097B2 / EP2497607B1 / EP2669061A1 — Hilti Aktiengesellschaft, "Power tool torque and grip sensing control architecture."
- * European Patent EP1881382A2 / US Patent US8316958B2 — Black & Decker Inc., "Adaptive control scheme for detecting and preventing torque conditions in power tools" (Patent family sharing technical disclosure and priority dates).
- * US Patent US4487270A — "Adjustable mechanical torque limiting clutch mechanism for rotary power tools" (Expired).
- * Personal Protective Equipment Standards & Technical Data — MAPA Ultrane 527 Specification Sheet; Ansell HyFlex 11-812 Technical Data Sheet (Tear-Away Glove Design Standards).
+Document No: SOMA-MOA-URM-2026-001 v1.2  
+Affiliation: Direct Independent Project under soma-moa (smart-system-multi-survival-architecture)  
+Original Language Clause: The Korean original text of this whitepaper serves as the primary governing standard, and translations into other languages are provided for reference purposes only.
+
+---
+
+### [Revision History]
+* v1.0 (2026-09-26) — Initial defensive publication whitepaper draft and GitHub release v1.0 finalized.
+* v1.1 (2026-09-26) — Added explicit clauses on legal responsibilities of implementers (safety certifications, SIL/PL verification) and FTO re-verification recommendations; refined AI copyright/equity exclusion defense (Human-in-the-Loop) notices; aligned cross-referenced patent family titles in Sections 7.4 and 8.3 (EP1881382A2 / US8316958B2).
+* v1.2 (2026-09-27) — Extended prior-art analysis confirmed that "automatic detection of tool/machine-side glove and body entanglement" was already included in patent families filed continuously since 1992 (including active Laguna Tools patents US11187378B2/US11662061B2 "glove-sensing mode"). Accordingly, claims in Section 7.3 (independent defensive publication domain) and Section 7.4 (FTO securing) are withdrawn, reframing the whitepaper from "independent defensive publication" to a comprehensive "Prior Art Landscape Survey," with updated cross-references in Section 8.3.
+
+---
+
+### [Basic Legal and Technical Notices]
+* AI Copyright and Equity Exclusion Defense — Multiple generative AI models were utilized strictly as intellectual formatting and typesetting utilities (Human-in-the-Loop) assisting the human architect (deundeuni) in refining creative concepts and problem definitions. Ownership of all core technical ideas belongs exclusively to the human architect.
+* As-Is and Unintentional Omission Disclaimer — This whitepaper is provided on an "As-Is" basis for technical review and prior-art landscape survey purposes. Unintentional omissions, clerical errors, or unfinalized technical specifications may be present. This document reflects technical directions at the time of publication and is subject to future enhancements during development and empirical testing.
+* Humility and Risk Mitigation Disclaimer — The technology and protective architecture disclosed herein do not guarantee the absolute elimination or 100% prevention of rotating machinery risks. They function as a multi-layered defense designed for the practical mitigation of accident probabilities, guidance/delay regarding human proximity to hazard zones, and minimization of injury severity upon accident occurrence.
+* Legal Responsibilities of Implementers and FTO Re-verification Recommendation — This whitepaper is a conceptual technical specification and prior-art compilation, not a certified commercial end-product. All subsequent developers and commercial entities attempting to build actual devices based on this architecture are advised to independently verify the latest legal status of cited patents (FTO re-verification), obtain mandatory national safety certifications (KCs, CE, UL, OSHA, etc.), and complete engineering validation prior to commercial deployment. Legal obligations for safety certification, risk assessment, and functional safety (SIL/PL) verification rest entirely with the implementing and operating entities.
+
+---
+
+## Section 1. Overview & Scope
+
+### 1.1 Universal Rotating Machinery Safety Project Declaration
+This whitepaper, established as an independent project under the soma-moa master hub, serves as Project No. 1 of the Universal Series addressing cross-cutting hazard factors regardless of specific tool or machinery classifications. This project comprehensively surveys the prior-art landscape of the "body proximity and entanglement detection layer" spanning all operational environments containing rotating elements—including machine tools, portable power tools, agricultural equipment, industrial conveyors, and textile machinery—and establishes a conceptual framework for a universal safety architecture.
+
+### 1.2 Target Invariance Clause
+This whitepaper outlines technical directions for a universal safety architecture detecting body proximity and entanglement across all accessible rotating elements, including stationary tools (lathes, drill presses, bench grinders), portable power tools (impact drills, hole-saw attached drills, angle grinders), agricultural power take-off (PTO) shafts, conveyors, rollers, textile machinery, and general industrial rotating shafts.
+
+### 1.3 Broad Concept Definition
+The term "body proximity and entanglement detection" defined in this architecture encompasses all mechanical, electrical, optical, electromagnetic, and vibrational sensing mechanisms as overarching concepts detecting precursor states where human tissue or worn clothing, gloves, or accessories approach hazard zones or initiate physical restraint. Unrestricted to specific sensor components, this functions as an active protective layer universally applicable to all industrial equipment performing rotational motion.
+
+---
+
+## Section 2. Background & Risk Mechanisms
+
+### 2.1 Explicit Separation of Hazard Mechanisms
+Kickback experienced during rotary tool operation arises from mechanical binding between the workpiece and tool, creating axial and rotational reaction forces that instantly compromise operator control. Conversely, entanglement occurs through direct friction and ingestion between rotating elements and human body parts or worn items (gloves, sleeves, workwear), where rotational drive forces draw the operator into the machine. This whitepaper focuses on active sensing and damage mitigation architectures specifically tailored to entanglement, explicitly distinguished from kickback phenomena.
+
+### 2.2 Empirical Failure Mode Analysis Based on Official Accident Databases
+Rotary entanglement accidents manifest through identical physical mechanisms despite variations in working environments and administrative rules, as proven by official industrial accident records and legal precedents.
+* **OSHA Inspection #2656262 (1985, Howard Steel Company)** — During I-beam drilling, an operator's glove caught on a rotating drill bit while applying wax, resulting in severe finger amputation. Demonstrates how workplace safety rules prohibiting glove usage around rotating parts failed due to human factors.
+* **UK HSE Case (2018, Viking Engineering)** — An apprentice operator's glove became entangled in a bench drill spindle fitted with a spade bit, causing finger amputation. Mandating glove wear to prevent cutting hazards inadvertently created the direct cause of an entanglement accident.
+* **Soto v. Powermatic Precedent** — An entanglement accident during drill press operation resulted in the amputation of two fingers and permanent loss of hand function. Trial testimony established that entanglement hazards in rotating machinery and preventive safety design principles had been engineered since the 1940s.
+
+### 2.3 Structural Limitations of Administrative Policy Guidelines
+The aforementioned cases illustrate that despite opposing administrative mandates ("prohibit gloves" vs. "mandatory gloves"), both environments led to catastrophic amputation accidents. Passive safety management relying solely on administrative rules or human vigilance has clear limitations, underscoring the necessity of technical architectures that actively detect proximity and entanglement precursors at the tool/machine frame level to shut off power.
+
+### 2.4 Hierarchical Relationship with Personal Protective Equipment (PPE)
+PPE and this safety architecture form a complementary relationship with distinct functional layers:
+* **Cut-Resistant Gloves** — Designed to prevent cuts and lacerations from sharp blades or materials using high-tenacity fibers; however, their high tensile strength increases the risk of pulling the entire hand into machinery during entanglement.
+* **Tear-Away Gloves** — Designed (such as MAPA Ultrane 527, Ansell HyFlex 11-812) to break apart under specific tensile loads to release the operator. Represents a post-event mitigation measure after entanglement occurs.
+* **Active Sensing Architecture of This Whitepaper** — A pre-event prevention layer at the machine/tool level that detects entanglement before or during its earliest onset to brake rotation. Thus, tear-away gloves and this architecture form complementary layers within a defense-in-depth framework rather than competing approaches.
+
+---
+
+## Section 3. System Architecture & Framework
+
+### 3.1 Independent Sensing Layer Configuration
+This architecture comprises an independent safety layer separated from conventional drive control circuits. The proximity sensing layer is engineered to emit emergency braking signals upon detecting physical parameter changes at the moment of mechanical binding or body contact.
+
+### 3.2 Three-Stage State Definition and Response Framework
+The system classifies and manages operational states around rotating elements into three distinct stages:
+* **Nominal Phase** — The rotating element performs machining within normal rotational speeds and torque parameters.
+* **Proximity Phase** — Human tissue or worn items approach within safety margins into detection zones. Enables secondary warning alerts and prepares braking readiness.
+* **Entanglement Phase** — Physical restraint precursors or contact between human body/clothing and rotating elements are detected. Triggers primary power cutoff, emergency braking, and reverse disengagement drive signals.
+
+### 3.3 Modular Signal Interface
+This architecture targets a modular safety signal interface standard capable of direct integration ranging from single controllers in portable power tools to PLC and emergency stop (E-Stop) circuits in large stationary machinery.
+
+---
+
+## Section 4. Safety Standards & Standards Alignment
+
+### 4.1 International and Industrial Safety Standards Alignment
+This architecture is designed to fulfill safeguarding requirements under existing industrial safety standards and extend them through active electronic controls.
+* **OSHA 1910.212 (General requirements for all machines)** — Complies with hazard prevention mandates at rotating parts, point of operation, and pinch points, aiming to provide equivalent or superior protective mitigation for high-operability workstations where physical fixed guards are impractical.
+* **ANSI B11.19 (Performance Requirements for Risk Reduction Measures)** — Accommodates standards regarding response time, system reliability, and sensing zone definitions to secure safety validity for emergency braking and power cutoff signals.
+* **KOSHA GUIDE (Korea Occupational Safety and Health Agency Technical Guidelines)** — Interlocks with safety operational guidelines for rotating machinery installation and maintenance to enhance field applicability.
+
+### 4.2 Mitigating Limitations of Physical Safeguards
+Fixed guards mandated by conventional standards frequently suffer from unauthorized removal due to obstructed sightlines or material feed constraints. This active sensing architecture offers an electronic protective scheme that maintains operational convenience without sacrificing protective performance.
+
+---
+
+## Section 5. Human & Organizational Factors [Reference Only]
+*This section is provided for reference context regarding workplace operational environments and human factors, and does not constitute technical claims.*
+
+### 5.1 Reaction Time (Startle Reflex) Limitations of Experienced Operators
+Even highly skilled operators exhibit inherent neuromuscular reaction time limits when responding to mechanical anomalies or entanglement onset. In high-speed rotating equipment, clothing intake occurs at speeds far exceeding human reflex capabilities. Relying solely on human perception or experienced reflexes to avoid entanglement accidents is physically insufficient.
+
+### 5.2 Hazard Analysis by Glove Material Characteristics
+Material properties of gloves worn in industrial settings induce distinct hazard profiles upon contact with rotating elements:
+* **Cotton and Standard Work Gloves** — Surface fibers easily catch on minor spindle roughness or drill bits, tending to wrap the entire hand around rotating shafts due to material texture.
+* **Cut-Resistant Gloves (HPPE, Aramid Series)** — Excellent cut resistance; however, high tensile synthetic fibers resist tearing during entanglement, transferring severe tensile forces to the operator's hand and wrist and causing catastrophic injuries.
+* **Tear-Away Gloves** — Engineered to tear at seam or coating interfaces above threshold tensile loads, reducing the risk of drawing the full hand into rotating parts.
+
+---
+
+## Section 6. System Integration & Universal Scalability
+
+### 6.1 Horizontal Application Examples Across Machine Categories
+Provides generalized signal structure examples to demonstrate universal applicability across machinery categories possessing rotational drives:
+* **Stationary Machine Tools (Lathes, Drill Presses, Bench Grinders)** — Interlocks with spindle controllers and Variable Frequency Drive (VFD) circuits to enforce emergency stop commands.
+* **Portable Power Tools (Impact Drills, Hole-Saw Attached Drills, Angle Grinders)** — Integrates directly into main FET/IGBT switching circuits inside tool housings to cut power and engage electronic braking.
+* **Industrial & Agricultural Rotating Elements (PTO Shafts, Conveyors, Rollers, Textile Machinery)** — Interfaces with external emergency stop modules and clutch disengagement mechanisms to mechanically decouple high-power drive shafts.
+
+### 6.2 Redundancy and Fail-Safe Architecture
+Adopts a fail-safe architecture that automatically halts rotation or alerts operators upon sensor wire disconnection, power supply anomalies, or internal sensing module faults. Maintains a safety latch state prohibiting restart after emergency cutoff until cause clearance and manual reset.
+
+### 6.3 Parallel Independent Relationship with Sister Whitepapers
+As an independent universal architecture compilation, this document maintains a parallel relationship with tool-specific whitepapers addressing unique machinery hazards (e.g., NCT chuck detachment, grinding wheel breakage, lathe/milling kickback). Specific whitepapers may reference this universal body proximity and entanglement detection layer as a lower-level sub-module.
+
+---
+
+## Section 7. Prior Art Respect & Landscape Survey
+
+### 7.1 Prior Art Respect Declaration
+This whitepaper deeply respects existing patent rights established by industry predecessors regarding kickback detection, torque management, mechanical clutches, and glove/body entanglement sensing. All technical concepts outlined herein aim to cite and map prior technological achievements without infringing upon valid patent scopes.
+
+### 7.2 Specification of High-Density Patent Domains (Patent Saturated Areas)
+The following technical domains are identified as high-density patent areas saturated with prior filings since the 1990s or expired into the public domain, representing prior art to be respected rather than independent claim territory:
+* **Glove and Body Entanglement Sensing Technologies** — Active patent families including Laguna Tools (US11187378B2, US11662061B2: dual-structure transitioning from safety switch glove-sensing mode to runtime collision-detection mode; active patents), individual filing US9936742B2 (2016, glove impedance dual-power mode switching; active through 2036), Warwick Mills US10104923B2 (glove-embedded proximity sensor interface; expired), Marel US5160289A (1992, wireless electromagnetic signal glove sensing; expired), US7236849B2 (2004, conductive glove contact sensing; expired), EP3432782A4 (hybrid glove-tool bidirectional sensing), US12025271 (RF/capacitive material discrimination), and related patent clusters filed from the 1990s to present.
+* **Kickback Sensing Technologies** — DeWalt E-Clutch systems (rotational acceleration and kickback sensing), US6479958B1 (rotary tool kickback sensing for hole saws), US7552781B2, and power tool anti-kickback control patent families.
+* **Sensor-Based Preventive Torque Management** — Hilti patent families (US9505097B2, EP2497607B1, EP2669061A1 combining torque and rotational motion changes to estimate operator grip force), Black & Decker EP1881382A2 / US8316958B2 (adaptive control schemes for torque state detection and prevention).
+* **Mechanical Torque-Limiting Clutches** — Public domain adjustable mechanical clutches including US4487270A (filed 1984, expired).
+
+### 7.3 Prior Art Landscape Survey
+This whitepaper does not create new exclusive rights in the public domain, but rather maps the prior-art landscape across rotating machinery proximity and entanglement hazards. Respecting valid rights of entities such as Laguna Tools, Warwick Mills, DeWalt, Hilti, and Black & Decker, it serves as a prior-art landscape guide helping implementers navigate patent density.
+
+### 7.4 High-Density Patent Domain Warning & Mandatory FTO Re-verification Notice
+The domain of rotating machinery body/entanglement sensing contains numerous active patents filed since the 1990s. Disclosure within this whitepaper does not automatically grant Freedom to Operate (FTO). Implementing entities must perform individual claim comparisons and up-to-date FTO investigations via patent attorneys. As a conceptual architecture compilation, legal obligations regarding physical implementation variations, national safety certifications (KCs, CE, UL, OSHA, etc.), and patent status re-verification (FTO confirmation) belong entirely to implementing and operating entities.
+
+---
+
+## Section 8. Sources & References
+
+### 8.1 Accident Databases & Official Injury Records
+* Occupational Safety and Health Administration (OSHA). "Inspection #2656262 - Howard Steel Company." Inspection Record, 1985.
+* UK Health and Safety Executive (HSE). "Apprentice Finger Amputation during Drilling Operation." HSE Safety Alert & Enforcement Record, Viking Engineering Case, 2018.
+* United States Court of Appeals / Legal Records. "Soto v. Powermatic." Court Precedent & Expert Witness Testimony Records on Drill Press Safety Design Principles.
+
+### 8.2 Industrial Safety Standards & Technical Guidelines
+* Occupational Safety and Health Administration (OSHA). "OSHA 1910.212: General requirements for all machines." Code of Federal Regulations.
+* American National Standards Institute (ANSI). "ANSI B11.19: Performance Requirements for Risk Reduction Measures: Safeguarding and Other Means of Reducing Risk."
+* Korea Occupational Safety and Health Agency (KOSHA). "KOSHA GUIDE: Technical Guidelines for Safeguard Installation and Work Safety on Rotating Machinery."
+
+### 8.3 Prior Art & Patent Literature
+* US Patent US5160289A — "Safety means for powered machinery" (1992, Marel, wireless electromagnetic signal glove sensing, Expired)
+* US Patent US7236849B2 — "Safety system for power equipment" (2004, conductive glove contact sensing, Expired)
+* US Patent US11187378B2 — Laguna Tools, Inc., "Power tool safety system" (2019, original glove-sensing mode filing, Active Patent)
+* US Patent US11662061B2 — Laguna Tools, Inc., "Power tool safety system" (2021, continuation patent, Active Patent)
+* US Patent US9936742B2 — "Glove impedance sensing for dual-power mode safety control" (2016, Active Patent through ~2036)
+* US Patent US10104923B2 — Warwick Mills, Inc., "Proximity-sensing protective gloves and tool interlock" (2017, Expired due to fee non-payment)
+* European Patent EP3432782A4 — "Hybrid bidirectional sensing glove and power tool safety apparatus" (2016)
+* US Patent US12025271 — "Material discrimination sensing using RF and capacitive elements for power tools" (Recent filing, Active Patent)
+* US Patent US6479958B1 — "Anti-kickback and breakthrough torque control for power tool" (Home Depot/Black & Decker family, explicit hole saw reference)
+* US Patent US7552781B2 — "Power tool anti-kickback system with rotational rate sensor" (Black & Decker Inc., rotational rate sensor kickback cutoff)
+* US Patent US9505097B2 / EP2497607B1 / EP2669061A1 — Hilti Aktiengesellschaft, "Power tool torque and grip sensing control architecture."
+* European Patent EP1881382A2 / US Patent US8316958B2 — Black & Decker Inc., "Adaptive control scheme for detecting and preventing torque conditions in power tools" (Same technology group, adjacent priority date family)
+* US Patent US4487270A — "Adjustable mechanical torque limiting clutch mechanism for rotary power tools." (Expired)
+* Personal Protective Equipment Standards & Product Data — MAPA Ultrane 527 Specification Sheet; Ansell HyFlex 11-812 Technical Data Sheet (Tear-Away Glove Design Standards).
+
+### 8.4 Copyright & License Notice
+Textual expressions in this document are published under the Creative Commons Attribution 4.0 International License (CC BY 4.0). The authors (deundeuni / soma-moa) claim no exclusive patent rights regarding ideas disclosed herein. Detailed license terms follow the LICENSE file in this repository.
