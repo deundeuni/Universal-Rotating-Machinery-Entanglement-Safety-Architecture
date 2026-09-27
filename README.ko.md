@@ -1,111 +1,167 @@
+# Universal-Rotating-Machinery-Entanglement-Safety-Architecture
 
-Universal-Rotating-Machinery-Entanglement-Safety-Architecture
-
-문서 번호: SOMA-MOA-URM-2026-001 v1.2
-소속: soma-moa (smart-system-multi-survival-architecture) 직속 독립 프로젝트
+문서 번호: SOMA-MOA-URM-2026-001 v1.2  
+소속: soma-moa (smart-system-multi-survival-architecture) 직속 독립 프로젝트  
 원본 언어 조항: 본 백서의 한국어 원문이 최종 기준 원본이며, 타 언어 번역본은 참고용으로만 활용된다.
-[문서 개정 이력 (Revision History)]
- * v1.0 (2026-09-26) — 최초 방어공개 백서 작성 및 GitHub 릴리즈 v1.0 확정
- * v1.1 (2026-09-26) — 실제 구현 주체의 법적 책무(안전인증 취득, SIL/PL 검증) 및 FTO 재검증 권고 조항 추가 명시, AI 저작권·지분 배제 방어(Human-in-the-Loop) 고지 문구 고도화, 7.4항 및 8.3항 선행 특허 패밀리(EP1881382A2 / US8316958B2) 및 특허 원문 제목 대조 반영
- * v1.2 (2026-09-27) — 확장 선행기술 검증 결과, "공구/기계 측 장갑·신체 말림 자동 감지"가 1992년부터 지속 출원된 특허군(Laguna Tools US11187378B2/US11662061B2 "glove-sensing mode" 유효특허 포함)에 이미 포함되어 있음을 확인. 이에 따라 7.3항(독자 방어공개 영역) 및 7.4항(FTO 확보) 주장을 철회하고, 본 백서의 성격을 "독자 방어공개"에서 "선행기술 지형 정리(Prior Art Landscape Survey)"로 전면 재정립 및 8.3항 신규 특허 원문 제목 대조·정정 완료
-[선행 법적·기술적 기본 고지]
- * AI 저작권·지분 배제 방어 — 다중 생성형 AI 모델들은 인간 설계자(deundeuni)의 창의적 구상과 문제 정의에 따라 기술 문서의 정형화 및 조판을 보조한 지적 도구(Human-in-the-Loop)로 활용되었으며, 원천 기술 사상의 소유권은 인간 설계자에 전속됨.
- * As-Is 및 비의도적 생략 고지 조항 — 본 백서는 현 시점의 기술 검토 및 선행기술 지형 정리(Prior Art Landscape Survey) 목적으로 현상 그대로(As-Is) 제공된다. 작성 및 문맥 검토 과정에서 비의도적 생략, 오기, 또는 미확정 기술 사양이 포함되어 있을 수 있다. 본 백서는 공개 시점 기준의 기술 지향을 반영하며, 향후 설계 발전 및 실증 작업에 따라 보완 및 수정이 이루어질 수 있다.
- * 겸양고지 및 위험 완화 성격 고지 조항 — 본 백서에서 개시되는 기술 및 방호 아키텍처는 회전기계 사고 위험의 '완전한 제거'나 '100% 차단'을 절대적으로 보장하는 것이 아니며, 사고 발생 가능성의 실질적 '완화', 위험 구역으로의 인체 근접 '지향/지연', 및 사고 발생 시 피해의 '최소화'를 목적으로 설계된 다중 방어 레이어임을 고지한다.
- * 실제 구현·상용화 주체의 법적 책무 및 FTO 재검증 권고 고지 — 본 백서는 개념적 기술 사상 및 선행기술 정리물이며 인증받은 상용 완제품이 아니다. 본 아키텍처를 바탕으로 실제 장치를 제작·구현하려는 모든 후속 개발자 및 사업자는, 본 문서 인용 선행 특허의 최신 상태(권리 존속 여부, 청구범위 변경 등)를 스스로 재확인(FTO 재검증)하고, 해당 국가의 법적 안전인증(KCs, CE, UL, OSHA 등)을 취득하며, 실제 작동에 대한 사전 테스트 및 공학적 검증을 완료한 후 안전하게 상용화할 것을 권장한다. 실제 구현 결과는 본 문서의 개념적 서술과 다를 수 있으며, 법적 안전인증 취득, 위험성 평가 및 기능안전(SIL/PL) 검증 의무는 전적으로 '실제 구현 및 운용 주체'에게 귀속된다.
-1장. 개요 및 적용 범위 (Overview & Scope)
-1.1 범용 회전기계 안전 프로젝트 선언
+
+---
+
+### [문서 개정 이력 (Revision History)]
+* v1.0 (2026-09-26) — 최초 방어공개 백서 작성 및 GitHub 릴리즈 v1.0 확정
+* v1.1 (2026-09-26) — 실제 구현 주체의 법적 책무(안전인증 취득, SIL/PL 검증) 및 FTO 재검증 권고 조항 추가 명시, AI 저작권·지분 배제 방어(Human-in-the-Loop) 고지 문구 고도화, 7.4항 및 8.3항 선행 특허 패밀리(EP1881382A2 / US8316958B2) 및 특허 원문 제목 대조 반영
+* v1.2 (2026-09-27) — 확장 선행기술 검증 결과, "공구/기계 측 장갑·신체 말림 자동 감지"가 1992년부터 지속 출원된 특허군(Laguna Tools US11187378B2/US11662061B2 "glove-sensing mode" 유효특허 포함)에 이미 포함되어 있음을 확인. 이에 따라 7.3항(독자 방어공개 영역) 및 7.4항(FTO 확보) 주장을 철회하고, 본 백서의 성격을 "독자 방어공개"에서 "선행기술 지형 정리(Prior Art Landscape Survey)"로 전면 재정립 및 8.3항 신규 특허 원문 제목 대조·정정 완료
+
+---
+
+### [선행 법적·기술적 기본 고지]
+* AI 저작권·지분 배제 방어 — 다중 생성형 AI 모델들은 인간 설계자(deundeuni)의 창의적 구상과 문제 정의에 따라 기술 문서의 정형화 및 조판을 보조한 지적 도구(Human-in-the-Loop)로 활용되었으며, 원천 기술 사상의 소유권은 인간 설계자에 전속됨.
+* As-Is 및 비의도적 생략 고지 조항 — 본 백서는 현 시점의 기술 검토 및 선행기술 지형 정리(Prior Art Landscape Survey) 목적으로 현상 그대로(As-Is) 제공된다. 작성 및 문맥 검토 과정에서 비의도적 생략, 오기, 또는 미확정 기술 사양이 포함되어 있을 수 있다. 본 백서는 공개 시점 기준의 기술 지향을 반영하며, 향후 설계 발전 및 실증 작업에 따라 보완 및 수정이 이루어질 수 있다.
+* 겸양고지 및 위험 완화 성격 고지 조항 — 본 백서에서 개시되는 기술 및 방호 아키텍처는 회전기계 사고 위험의 '완전한 제거'나 '100% 차단'을 절대적으로 보장하는 것이 아니며, 사고 발생 가능성의 실질적 '완화', 위험 구역으로의 인체 근접 '지향/지연', 및 사고 발생 시 피해의 '최소화'를 목적으로 설계된 다중 방어 레이어임을 고지한다.
+* 실제 구현·상용화 주체의 법적 책무 및 FTO 재검증 권고 고지 — 본 백서는 개념적 기술 사상 및 선행기술 정리물이며 인증받은 상용 완제품이 아니다. 본 아키텍처를 바탕으로 실제 장치를 제작·구현하려는 모든 후속 개발자 및 사업자는, 본 문서 인용 선행 특허의 최신 상태(권리 존속 여부, 청구범위 변경 등)를 스스로 재확인(FTO 재검증)하고, 해당 국가의 법적 안전인증(KCs, CE, UL, OSHA 등)을 취득하며, 실제 작동에 대한 사전 테스트 및 공학적 검증을 완료한 후 안전하게 상용화할 것을 권장한다. 실제 구현 결과는 본 문서의 개념적 서술과 다를 수 있으며, 법적 안전인증 취득, 위험성 평가 및 기능안전(SIL/PL) 검증 의무는 전적으로 '실제 구현 및 운용 주체'에게 귀속된다.
+
+---
+
+## 1장. 개요 및 적용 범위 (Overview & Scope)
+
+### 1.1 범용 회전기계 안전 프로젝트 선언
 본 백서는 soma-moa 마스터허브 산하의 독립 프로젝트로서, 특정 공구나 기계 분류에 국한되지 않는 횡단면(cross-cutting) 위험 요소를 다루는 범용(Universal) 시리즈 제1호 프로젝트로 정립된다. 본 프로젝트는 공작기계, 휴대용 전동공구, 농업용 동력 장치, 산업용 컨베이어 및 섬유기계 등 회전체가 존재하는 모든 작업 환경을 관통하는 "신체 근접 및 말림(Entanglement) 감지 계층"의 선행기술 지형을 종합적으로 정리하고 범용 안전 아키텍처의 개념적 프레임워크를 정립한다.
-1.2 적용 대상 무관성 조항
+
+### 1.2 적용 대상 무관성 조항
 본 백서는 고정형(선반, 드릴프레스, 탁상연삭기 등) 및 휴대형(임팩드릴, 홀쇼 부착 드릴, 앵글그라인더 등) 회전 공구뿐 아니라, 농업용 동력인출축(PTO), 컨베이어·롤러, 섬유기계, 일반 산업용 회전축 등 인체가 근접 가능한 모든 회전체를 대상으로, 신체 근접·말림을 감지하는 범용 안전 아키텍처의 기술 지향을 개시한다.
-1.3 상위개념 포괄 정의
+
+### 1.3 상위개념 포괄 정의
 본 아키텍처에서 정의하는 "신체 근접 및 말림 감지"는 인체 조직 또는 인체에 착용된 피복·장갑·장신구 등이 회전체의 위험 구역(Hazard Zone)에 접근하거나 물리적 구속이 시작되는 전조 상태를 검출하는 모든 기계적, 전기적, 광학적, 전자기적, 진동학적 감지 메커니즘을 상위개념으로 포괄한다. 이는 특정 센서 소자에 한정되지 않으며, 회전 운동을 수행하는 모든 산업 장비에 보편적으로 적용 가능한 능동 방호 레이어로 기능한다.
-2장. 사고 통계 및 실제 실패모드 분석 (Background & Risk Mechanisms)
-2.1 위험 메커니즘의 명확한 분리
+
+---
+
+## 2장. 사고 통계 및 실제 실패모드 분석 (Background & Risk Mechanisms)
+
+### 2.1 위험 메커니즘의 명확한 분리
 작업자가 회전 공구 사용 중 경험하는 반동(Kickback) 현상은 작업 대상물과 공구 간의 기계적 물림에 의해 발생하며 작업자의 제어력을 순간적으로 상실시키는 축방향 및 회전방향 반력이다. 반면, 말림(Entanglement) 현상은 회전체와 인체 또는 착용물(장갑, 소매, 작업복 등) 간의 직접적인 마찰·인입에 의해 발생하며, 회전체의 구동력이 인체를 기계 내부로 끌어당기는 현상이다. 본 백서는 반동 현상과 명확히 구분되는 말림 현상의 능동 감지 및 피해 완화 아키텍처에 집중한다.
-2.2 공식 사고 DB 기반 실패모드 분석
+
+### 2.2 공식 사고 DB 기반 실패모드 분석
 회전체 말림 사고는 작업 환경 및 개별 관리 규정의 차이에도 불구하고 동일한 물리적 메커니즘으로 발생한다. 이는 검증된 공식 산업재해 기록 및 법적 판례를 통해 입증된다.
- * OSHA Inspection #2656262 (1985, Howard Steel Company) — I빔 드릴링 작업 중 작업자가 드릴 비트에 왁스를 도포하는 과정에서 착용한 장갑이 회전하는 비트에 걸려 손가락이 절단되는 중상해 사고가 발생함. 현장 안전 규정인 '회전체 작업 시 장갑 착용 금지' 조항이 인적 요인으로 인해 준수되지 못한 사례임.
- * UK HSE 사례 (2018, Viking Engineering) — 탁상드릴(스페이드 비트 장착) 작업 중 견습 작업자의 장갑이 회전축에 말려 들어가 손가락이 절단됨. 해당 사업장은 법적 절단 위험 방지를 위해 장갑 착용을 필수 지침으로 규정하고 있었으나, 이것이 오히려 말림 사고의 직접적 원인이 된 사례임.
- * Soto v. Powermatic 판례 — 드릴프레스 작업 중 발생한 말림 사고로 작업자의 손가락 2개가 절단되고 손 기능의 영구 손실이 발생함. 재판 과정에서 회전기계의 말림 위험과 이를 예방하기 위한 안전설계 원칙이 이미 1940년대부터 공학적으로 밝혀져 있었음이 증언 기록으로 입증됨.
-2.3 정책적 관리 지침의 구조적 한계
+* **OSHA Inspection #2656262 (1985, Howard Steel Company)** — I빔 드릴링 작업 중 작업자가 드릴 비트에 왁스를 도포하는 과정에서 착용한 장갑이 회전하는 비트에 걸려 손가락이 절단되는 중상해 사고가 발생함. 현장 안전 규정인 '회전체 작업 시 장갑 착용 금지' 조항이 인적 요인으로 인해 준수되지 못한 사례임.
+* **UK HSE 사례 (2018, Viking Engineering)** — 탁상드릴(스페이드 비트 장착) 작업 중 견습 작업자의 장갑이 회전축에 말려 들어가 손가락이 절단됨. 해당 사업장은 법적 절단 위험 방지를 위해 장갑 착용을 필수 지침으로 규정하고 있었으나, 이것이 오히려 말림 사고의 직접적 원인이 된 사례임.
+* **Soto v. Powermatic 판례** — 드릴프레스 작업 중 발생한 말림 사고로 작업자의 손가락 2개가 절단되고 손 기능의 영구 손실이 발생함. 재판 과정에서 회전기계의 말림 위험과 이를 예방하기 위한 안전설계 원칙이 이미 1940년대부터 공학적으로 밝혀져 있었음이 증언 기록으로 입증됨.
+
+### 2.3 정책적 관리 지침의 구조적 한계
 상기 사례들은 '장갑 착용 금지' 규범과 '장갑 착용 의무' 규범이 서로 정반대임에도 불구하고 두 환경 모두에서 치명적인 절단 사고로 이어졌음을 보여준다. 관리적 지침이나 인적 주의력에만 의존하는 수동적 안전 관리 체계는 한계가 명확하며, 공구 및 기계 프레임 자체에서 능동적으로 근접과 말림 전조를 감지하여 동력을 차단하는 기술적 아키텍처가 필수적임을 입증한다.
-2.4 개인보호구(PPE)와의 계층적 관계 정립
+
+### 2.4 개인보호구(PPE)와의 계층적 관계 정립
 개인보호구와 본 안전 아키텍처는 보완적 관계를 형성하며, 다음과 같이 기능 계층이 구분된다.
- * 자상방지장갑(Cut-Resistant Gloves) — 고강도 섬유를 통해 날카로운 칼날이나 자재에 의한 '베임/절단'을 방지하기 위한 목적의 장갑이며, 회전체 말림 발생 시 인장 강도가 높아 오히려 손 전체를 기계로 끌어당기는 위험을 유발할 수 있다.
- * 분리형/찢어지는 장갑(Tear-Away Gloves) — MAPA Ultrane 527, Ansell HyFlex 11-812 등과 같이 일정 수준 이상의 인장력이 작용할 때 장갑 재질이 스스로 파손되어 작업자를 탈출시키는 구조의 장갑이다. 이는 말림 현상이 '발생한 이후'의 사후 피해 완화(Post-Event Mitigation) 수단이다.
- * 본 백서의 능동 감지 아키텍처 — 공구 및 기계 시스템 측면에서 말림 현상이 발생하기 '전 또는 극초기'에 이를 감지하고 회전을 제동하는 사전 예방(Pre-Event Prevention) 계층이다. 따라서 찢어지는 장갑과 본 백서의 아키텍처는 상호 경쟁 관계가 아닌 다중 방어선(Defense-in-Depth)을 구성하는 보완 관계이다.
-3장. 시스템 아키텍처 및 신체 근접 감지 프레임워크 (System Architecture & Framework)
-3.1 독립적 감지 계층 구성
+* **자상방지장갑(Cut-Resistant Gloves)** — 고강도 섬유를 통해 날카로운 칼날이나 자재에 의한 '베임/절단'을 방지하기 위한 목적의 장갑이며, 회전체 말림 발생 시 인장 강도가 높아 오히려 손 전체를 기계로 끌어당기는 위험을 유발할 수 있다.
+* **분리형/찢어지는 장갑(Tear-Away Gloves)** — MAPA Ultrane 527, Ansell HyFlex 11-812 등과 같이 일정 수준 이상의 인장력이 작용할 때 장갑 재질이 스스로 파손되어 작업자를 탈출시키는 구조의 장갑이다. 이는 말림 현상이 '발생한 이후'의 사후 피해 완화(Post-Event Mitigation) 수단이다.
+* **본 백서의 능동 감지 아키텍처** — 공구 및 기계 시스템 측면에서 말림 현상이 발생하기 '전 또는 극초기'에 이를 감지하고 회전을 제동하는 사전 예방(Pre-Event Prevention) 계층이다. 따라서 찢어지는 장갑과 본 백서의 아키텍처는 상호 경쟁 관계가 아닌 다중 방어선(Defense-in-Depth)을 구성하는 보완 관계이다.
+
+---
+
+## 3장. 시스템 아키텍처 및 신체 근접 감지 프레임워크 (System Architecture & Framework)
+
+### 3.1 독립적 감지 계층 구성
 본 아키텍처는 기계의 기존 구동 제어부와 분리된 독립 안전 레이어로 구성된다. 신체 근접 감지 계층은 기계적 구속이나 인체 접촉이 일어나는 순간의 물리량 변화를 감지하여 비상 제동 신호를 발산하도록 설계된다.
-3.2 3단계 상태 정의 및 대응 프레임워크
+
+### 3.2 3단계 상태 정의 및 대응 프레임워크
 시스템은 작업 환경 및 회전체 주변의 상태를 다음 3단계로 분류하여 관리한다.
- * 정상 작동 상태 (Nominal Phase) — 회전체가 정상 회전수 및 정상 토크 범주 내에서 가공 작업을 수행하는 상태.
- * 근접 경고 상태 (Proximity Phase) — 인체 조직 또는 착용물이 회전체의 세이프티 마진 내로 접근하여 감지 영역에 진입한 상태. 보조 경고 신호 발산 및 제동 준비 상태 전환 가능.
- * 말림 비상 상태 (Entanglement Phase) — 인체 또는 피복의 회전체 물리적 구속 전조 또는 접촉이 감지된 상태. 1차 동력 차단 및 비상 브레이크 작동, 역회전 이탈 구동 신호 전달 가능.
-3.3 모듈형 신호 인터페이스
+* **정상 작동 상태 (Nominal Phase)** — 회전체가 정상 회전수 및 정상 토크 범주 내에서 가공 작업을 수행하는 상태.
+* **근접 경고 상태 (Proximity Phase)** — 인체 조직 또는 착용물이 회전체의 세이프티 마진 내로 접근하여 감지 영역에 진입한 상태. 보조 경고 신호 발산 및 제동 준비 상태 전환 가능.
+* **말림 비상 상태 (Entanglement Phase)** — 인체 또는 피복의 회전체 물리적 구속 전조 또는 접촉이 감지된 상태. 1차 동력 차단 및 비상 브레이크 작동, 역회전 이탈 구동 신호 전달 가능.
+
+### 3.3 모듈형 신호 인터페이스
 본 아키텍처는 소형 휴대용 전동공구의 단일 컨트롤러부터 대형 산업용 고정 기계의 PLC 및 비상 정지(E-Stop) 회로까지 직접 연동될 수 있는 모듈형 안전 신호 인터페이스 표준을 지향한다.
-4장. 안전 규격 및 관련 표준 적응성 (Safety Standards & Standards Alignment)
-4.1 국제 및 산업 안전 규격 적응성
+
+---
+
+## 4장. 안전 규격 및 관련 표준 적응성 (Safety Standards & Standards Alignment)
+
+### 4.1 국제 및 산업 안전 규격 적응성
 본 아키텍처는 기존 산업 안전 규격의 방호 요건을 충족하고 이를 능동 전자 제어 기술로 확장할 수 있도록 설계된다.
- * OSHA 1910.212 (General requirements for all machines) — 회전부, 작업점(Point of Operation), 핀치 포인트 등에서의 위험 방지 의무 조항을 준수하며, 기존의 물리적 방호울(Guard)을 설치하기 어려운 고가동성 작업점에 대해 동등 이상의 안전 성능 완화를 지향한다.
- * ANSI B11.19 (Performance Requirements for Risk Reduction Measures) — 위험 감축 조치의 응답 시간, 시스템 신뢰성, 및 감지 구역 정의에 관한 기준을 수용하여 비상 제동 및 동력 차단 신호의 안전 유효성을 확보한다.
- * KOSHA GUIDE (한국산업안전보건공단 기술지침) — 회전기계 방호장치 설치 및 정비 작업 시 안전 조치 지침과 연계하여, 현장 적용성을 높인다.
-4.2 물리적 방호 규격의 한계 완화
+* **OSHA 1910.212 (General requirements for all machines)** — 회전부, 작업점(Point of Operation), 핀치 포인트 등에서의 위험 방지 의무 조항을 준수하며, 기존의 물리적 방호울(Guard)을 설치하기 어려운 고가동성 작업점에 대해 동등 이상의 안전 성능 완화를 지향한다.
+* **ANSI B11.19 (Performance Requirements for Risk Reduction Measures)** — 위험 감축 조치의 응답 시간, 시스템 신뢰성, 및 감지 구역 정의에 관한 기준을 수용하여 비상 제동 및 동력 차단 신호의 안전 유효성을 확보한다.
+* **KOSHA GUIDE (한국산업안전보건공단 기술지침)** — 회전기계 방호장치 설치 및 정비 작업 시 안전 조치 지침과 연계하여, 현장 적용성을 높인다.
+
+### 4.2 물리적 방호 규격의 한계 완화
 기존 규격이 요구하는 고정형 방호울은 작업 시야 확보 장애나 자재 투입 제한 등의 이유로 현장에서 임의 제거되는 실패모드가 빈번하다. 본 능동 감지 아키텍처는 물리적 방호울의 시야 차단 한계를 완화하고 작업 편의성을 유지하면서도 방호 성능을 유지할 수 있는 전자적 방호 체계를 제공한다.
-5장. 현장 조직·인적 요인 배경 [참고] (Human & Organizational Factors - Reference Only)
-본 장은 기술 청구 대상이 아니며, 현장 작업 환경 및 인적 요인에 대한 배경 지식을 제공하기 위한 참고 섹션이다.
-5.1 숙련자의 반동 및 말림 대응 반사 (Startle Reflex) 한계
+
+---
+
+## 5장. 현장 조직·인적 요인 배경 [참고] (Human & Organizational Factors - Reference Only)
+*본 장은 기술 청구 대상이 아니며, 현장 작업 환경 및 인적 요인에 대한 배경 지식을 제공하기 위한 참고 섹션이다.*
+
+### 5.1 숙련자의 반동 및 말림 대응 반사 (Startle Reflex) 한계
 숙련된 작업자라 할지라도 기계적 이상이나 말림 현상이 발생하는 순간 지각 및 운동 신경을 거쳐 반응하는 시각-근육 반응 시간(Human Reaction Time)은 일정 한계를 가진다. 그러나 고속 회전체에서 피복이 감겨 들어가는 속도는 매우 신속하게 진행된다. 따라서 작업자의 인지 능력이나 경험적 반사 신경에만 의존하여 말림 사고를 피하는 것은 물리적으로 한계가 존재한다.
-5.2 장갑 재질별 위험 특성 분석
+
+### 5.2 장갑 재질별 위험 특성 분석
 작업 현장에서 사용되는 장갑의 재질적 특성은 회전체 접촉 시 서로 다른 형태의 위험을 유발한다.
- * 면장갑 및 일반 작업장갑 — 표면의 섬유 조직이 회전축의 미세한 거칠기나 비트에 쉽게 걸리며, 재질의 특성으로 인해 회전축 전체로 휘말려 들어가는 경향이 있다.
- * 자상방지장갑 (HPPE, 아라미드 계열) — 베임에 대한 저항성은 뛰어나나, 고강도 인공섬유로 제작되어 회전체에 말려들어갈 경우 장갑이 잘 끊어지지 않고 작업자의 손과 손목으로 인장력이 전달되어 중상해 사고를 유발할 수 있다.
- * 찢어지는 장갑 (Tear-Away) — 특정 한계 인장력 이상에서 코팅면이나 봉제선이 순간적으로 분리되도록 설계되어 회전체에 손 전체가 끌려 들어가는 위험을 감소시킨다.
-6장. 시스템 통합 및 범용 확장성 (System Integration & Universal Scalability)
-6.1 기계 유형별 확장 적용 예시
+* **면장갑 및 일반 작업장갑** — 표면의 섬유 조직이 회전축의 미세한 거칠기나 비트에 쉽게 걸리며, 재질의 특성으로 인해 회전축 전체로 휘말려 들어가는 경향이 있다.
+* **자상방지장갑 (HPPE, 아라미드 계열)** — 베임에 대한 저항성은 뛰어난, 고강도 인공섬유로 제작되어 회전체에 말려들어갈 경우 장갑이 잘 끊어지지 않고 작업자의 손과 손목으로 인장력이 전달되어 중상해 사고를 유발할 수 있다.
+* **찢어지는 장갑 (Tear-Away)** — 특정 한계 인장력 이상에서 코팅면이나 봉제선이 순간적으로 분리되도록 설계되어 회전체에 손 전체가 끌려 들어가는 위험을 감소시킨다.
+
+---
+
+## 6장. 시스템 통합 및 범용 확장성 (System Integration & Universal Scalability)
+
+### 6.1 기계 유형별 확장 적용 예시
 본 아키텍처는 회전 구동부가 존재하는 다양한 기계군에 보편적으로 적용 가능성을 고려할 수 있도록 신호 구조의 범용화 예시를 제시한다.
- * 고정형 공작기계 (선반, 드릴프레스, 탁상연삭기 등) — 스핀들 제어부 및 주동력 인버터(VFD) 회로와 연동하여 비상 정지 명령을 수행하도록 구속할 수 있다.
- * 휴대형 전동공구 (임팩드릴, 홀쇼 부착 드릴, 앵글그라인더 등) — 공구 내부의 메인 FET/IGBT 스위칭 회로를 직접 차단하고 전자 브레이크를 작동시키는 모듈로 통합되는 구성을 예시한다.
- * 산업 및 농업용 회전체 (PTO축, 컨베이어, 롤러, 섬유기계 등) — 외부 비상 정지 모듈 및 클러치 차단 메커니즘과 연계하여 대형 구동축의 동력 전달을 기계적으로 분리할 수 있다.
-6.2 이중화 및 안전 상태 래치 (Fail-Safe Architecture)
+* **고정형 공작기계 (선반, 드릴프레스, 탁상연삭기 등)** — 스핀들 제어부 및 주동력 인버터(VFD) 회로와 연동하여 비상 정지 명령을 수행하도록 구속할 수 있다.
+* **휴대형 전동공구 (임팩드릴, 홀쇼 부착 드릴, 앵글그라인더 등)** — 공구 내부의 메인 FET/IGBT 스위칭 회로를 직접 차단하고 전자 브레이크를 작동시키는 모듈로 통합되는 구성을 예시한다.
+* **산업 및 농업용 회전체 (PTO축, 컨베이어, 롤러, 섬유기계 등)** — 외부 비상 정지 모듈 및 클러치 차단 메커니즘과 연계하여 대형 구동축의 동력 전달을 기계적으로 분리할 수 있다.
+
+### 6.2 이중화 및 안전 상태 래치 (Fail-Safe Architecture)
 센서 단선, 전원 공급 이상 또는 감지 모듈의 내부 고장 발생 시, 시스템은 자동으로 회전체를 정지시키거나 경고 상태를 유발하는 고장 안전(Fail-Safe) 아키텍처를 채택한다. 비상 차단이 실행된 이후에는 원인 해제 및 수동 리셋 조치 전까지 재가동을 금지하는 안전 래치 구조를 유지한다.
-6.3 자매 백서와의 병렬 독립 관계
+
+### 6.3 자매 백서와의 병렬 독립 관계
 본 백서는 독립적인 범용 아키텍처 정리물으로서, NCT, 연삭기, 선반/밀링 등 개별 공구 고유의 위험(척 이탈, 숫돌 파손, 특정 공구 반동 등)을 다루는 자매 백서들과 병렬적 위치를 가진다. 개별 백서들은 본 백서가 제시하는 범용 신체 근접·말림 감지 계층을 하위 참조 모듈로 활용할 수 있다.
-7장. 선행기술 존중 및 지형 정리 (Prior Art Respect & Landscape Survey)
-7.1 선행기술 존중 선언
+
+---
+
+## 7장. 선행기술 존중 및 지형 정리 (Prior Art Respect & Landscape Survey)
+
+### 7.1 선행기술 존중 선언
 본 백서는 기존 산업계 및 선학들이 구축한 반동(Kickback) 감지 기술, 토크 관리 기술, 기계적 클러치 및 장갑/신체 말림 감지 관련 기존 특허 권리를 깊이 존중한다. 본 백서에 명시된 모든 기술 사상은 기존 특허권자의 정당한 권리 범위를 침해하지 않으며, 선행 출원자들의 기술적 성과를 인용하고 정리하는 목적을 가진다.
-7.2 선행기술 포화 영역 명시 (특허 밀집 구역)
+
+### 7.2 선행기술 포화 영역 명시 (특허 밀집 구역)
 다음 기술 분야들은 이미 업계에서 1990년대부터 현재까지 지속 출원되어 수많은 특허로 포화되어 있거나 존속기간이 만료된 고밀도 특허 구역으로, 독자적 청구 대상이 아니며 존중받아야 할 선행기술로 명시한다.
- * 장갑 및 신체 말림 감지 기술 — Laguna Tools 계열 특허(US11187378B2, US11662061B2: 안전스위치 작동 시 glove-sensing mode 진입 후 런타임 중 collision-detection mode로 전환되는 이원 구조, 유효 특허), 개인 출원 US9936742B2(2016년, 장갑 임피던스 상태 기반 듀얼파워모드 전환, 2036년까지 유효), Warwick Mills US10104923B2(장갑 내장형 근접센서 인터페이스, 만료), Marel US5160289A(1992년, 무선전자기신호 장갑 감지, 만료), US7236849B2(2004년, 전도성 장갑 접촉 감지, 만료), EP3432782A4(장갑+공구 양방향 센싱 하이브리드), US12025271(RF/정전용량 센서 재질판별형) 등 1990년대부터 현재까지 지속 출원된 특허군.
- * 반동/킥백(Kickback) 감지 기술 — DeWalt E-Clutch 시스템(회전 가속도 및 킥백 감지 구조), US6479958B1(홀쇼 등 회전 공구의 반동 감지 특허), US7552781B2 등 전동공구의 반동 제어 관련 공표 기술군.
- * 센서 기반 예방형 토크 관리 기술 — Hilti 계열 특허(US9505097B2, EP2497607B1, EP2669061A1 등 토크 및 회전 운동 변화를 결합하여 작업자의 쥐는 힘을 추정하는 기술), Black&Decker EP1881382A2 / US8316958B2(토크 상태 감지 및 예방을 위한 적응형 제어 체계) 등.
- * 기계식 토크 제한 클러치 기술 — 1984년 출원된 US4487270A 등 존속기간이 만료되어 공공영역(Public Domain)에 속한 기계식 조절 클러치 구조.
-7.3 선행기술 지형 정리 (Prior Art Landscape Survey)
+* **장갑 및 신체 말림 감지 기술** — Laguna Tools 계열 특허(US11187378B2, US11662061B2: 안전스위치 작동 시 glove-sensing mode 진입 후 런타임 중 collision-detection mode로 전환되는 이원 구조, 유효 특허), 개인 출원 US9936742B2(2016년, 장갑 임피던스 상태 기반 듀얼파워모드 전환, 2036년까지 유효), Warwick Mills US10104923B2(장갑 내장형 근접센서 인터페이스, 만료), Marel US5160289A(1992년, 무선전자기신호 장갑 감지, 만료), US7236849B2(2004년, 전도성 장갑 접촉 감지, 만료), EP3432782A4(장갑+공구 양방향 센싱 하이브리드), US12025271(RF/정전용량 센서 재질판별형) 등 1990년대부터 현재까지 지속 출원된 특허군.
+* **반동/킥백(Kickback) 감지 기술** — DeWalt E-Clutch 시스템(회전 가속도 및 킥백 감지 구조), US6479958B1(홀쇼 등 회전 공구의 반동 감지 특허), US7552781B2 등 전동공구의 반동 제어 관련 공표 기술군.
+* **센서 기반 예방형 토크 관리 기술** — Hilti 계열 특허(US9505097B2, EP2497607B1, EP2669061A1 등 토크 및 회전 운동 변화를 결합하여 작업자의 쥐는 힘을 추정하는 기술), Black&Decker EP1881382A2 / US8316958B2(토크 상태 감지 및 예방을 위한 적응형 제어 체계) 등.
+* **기계식 토크 제한 클러치 기술** — 1984년 출원된 US4487270A 등 존속기간이 만료되어 공공영역(Public Domain)에 속한 기계식 조절 클러치 구조.
+
+### 7.3 선행기술 지형 정리 (Prior Art Landscape Survey)
 본 백서는 공공영역에 새로운 독점 배제 영역을 창설하는 것이 아니라, 회전기계 신체·말림 감지라는 위험 영역 전반에 걸친 선행기술 지형을 정리하여 제시한다. Laguna Tools, Warwick Mills, DeWalt, Hilti, Black&Decker 등 각 주체의 기존 권리를 깊이 존중하며, 후속 구현자가 이 분야의 특허 밀집도를 사전에 파악할 수 있도록 돕는 선행기술 지도(Prior Art Landscape) 역할을 목적으로 한다.
-7.4 고밀도 특허 구역 경고 및 FTO 재검증 필수 고지
+
+### 7.4 고밀도 특허 구역 경고 및 FTO 재검증 필수 고지
 본 백서가 다루는 회전기계 신체·말림 감지 영역은 1990년대부터 현재까지 다수의 유효 특허가 존재하는 고밀도 특허 지역(Densely Patented Domain)이다. 본 백서의 개시만으로 자유실시(FTO)가 확보되는 것이 아니며, 실제 구현을 시도하는 모든 주체는 반드시 전문 변리사를 통한 개별 청구항 대조 및 최신 FTO 조사를 선행해야 한다. 본 백서는 개념적 아키텍처 정리물에 해당하므로 실제 장치 구현 시 발생할 수 있는 구현 결과의 차이, 해당 국가별 법적 안전인증(KCs, CE, UL, OSHA 등) 취득 및 선행 특허의 최신 권리 상태 재검증(FTO 재확인) 의무는 전적으로 실제 구현 및 운용 주체에게 귀속된다.
-8장. 출처 및 참조 문헌 (Sources & References)
-8.1 사고 DB 및 공공 기관 재해 기록
- * Occupational Safety and Health Administration (OSHA). "Inspection #2656262 - Howard Steel Company." Inspection Record, 1985.
- * UK Health and Safety Executive (HSE). "Apprentice Finger Amputation during Drilling Operation." HSE Safety Alert & Enforcement Record, Viking Engineering Case, 2018.
- * United States Court of Appeals / Legal Records. "Soto v. Powermatic." Court Precedent & Expert Witness Testimony Records on Drill Press Safety Design Principles.
-8.2 산업 안전 규격 및 기술 지침
- * Occupational Safety and Health Administration (OSHA). "OSHA 1910.212: General requirements for all machines." Code of Federal Regulations.
- * American National Standards Institute (ANSI). "ANSI B11.19: Performance Requirements for Risk Reduction Measures: Safeguarding and Other Means of Reducing Risk."
- * 한국산업안전보건공단 (KOSHA). "KOSHA GUIDE: 회전기계 방호장치 설치 및 작업 안전 기술지침."
-8.3 선행기술 및 특허 문헌
- * US Patent US5160289A — "Safety means for powered machinery" (1992, Marel, 무선전자기신호 장갑 감지, Expired)
- * US Patent US7236849B2 — "Safety system for power equipment" (2004, 전도성 장갑 접촉 감지, Expired)
- * US Patent US11187378B2 — Laguna Tools, Inc., "Power tool safety system" (2019, glove-sensing mode 원출원, 유효 특허)
- * US Patent US11662061B2 — Laguna Tools, Inc., "Power tool safety system" (2021, continuation patent, 유효 특허)
- * US Patent US9936742B2 — "Glove impedance sensing for dual-power mode safety control" (2016, 유효 특허 ~2036)
- * US Patent US10104923B2 — Warwick Mills, Inc., "Proximity-sensing protective gloves and tool interlock" (2017, 연체료 미납 만료)
- * European Patent EP3432782A4 — "Hybrid bidirectional sensing glove and power tool safety apparatus" (2016)
- * US Patent US12025271 — "Material discrimination sensing using RF and capacitive elements for power tools" (최근 출원, 유효 특허)
- * US Patent US6479958B1 — "Anti-kickback and breakthrough torque control for power tool" (Home Depot/Black&Decker 계열, Hole Saw 명시적 언급)
- * US Patent US7552781B2 — "Power tool anti-kickback system with rotational rate sensor" (Black & Decker Inc., 회전 속도 센서 기반 킥백 차단 체계)
- * US Patent US9505097B2 / EP2497607B1 / EP2669061A1 — Hilti Aktiengesellschaft, "Power tool torque and grip sensing control architecture."
- * European Patent EP1881382A2 / US Patent US8316958B2 — Black & Decker Inc., "Adaptive control scheme for detecting and preventing torque conditions in power tools" (동일 기술군·우선일 인접 패밀리 특허)
- * US Patent US4487270A — "Adjustable mechanical torque limiting clutch mechanism for rotary power tools." (Expired)
- * Personal Protective Equipment Standards & Product Data — MAPA Ultrane 527 Specification Sheet; Ansell HyFlex 11-812 Technical Data Sheet (Tear-Away Glove Design Standards).
+
+---
+
+## 8장. 출처 및 참조 문헌 (Sources & References)
+
+### 8.1 사고 DB 및 공공 기관 재해 기록
+* Occupational Safety and Health Administration (OSHA). "Inspection #2656262 - Howard Steel Company." Inspection Record, 1985.
+* UK Health and Safety Executive (HSE). "Apprentice Finger Amputation during Drilling Operation." HSE Safety Alert & Enforcement Record, Viking Engineering Case, 2018.
+* United States Court of Appeals / Legal Records. "Soto v. Powermatic." Court Precedent & Expert Witness Testimony Records on Drill Press Safety Design Principles.
+
+### 8.2 산업 안전 규격 및 기술 지침
+* Occupational Safety and Health Administration (OSHA). "OSHA 1910.212: General requirements for all machines." Code of Federal Regulations.
+* American National Standards Institute (ANSI). "ANSI B11.19: Performance Requirements for Risk Reduction Measures: Safeguarding and Other Means of Reducing Risk."
+* 한국산업안전보건공단 (KOSHA). "KOSHA GUIDE: 회전기계 방호장치 설치 및 작업 안전 기술지침."
+
+### 8.3 선행기술 및 특허 문헌
+* US Patent US5160289A — "Safety means for powered machinery" (1992, Marel, 무선전자기신호 장갑 감지, Expired)
+* US Patent US7236849B2 — "Safety system for power equipment" (2004, 전도성 장갑 접촉 감지, Expired)
+* US Patent US11187378B2 — Laguna Tools, Inc., "Power tool safety system" (2019, glove-sensing mode 원출원, 유효 특허)
+* US Patent US11662061B2 — Laguna Tools, Inc., "Power tool safety system" (2021, continuation patent, 유효 특허)
+* US Patent US9936742B2 — "Glove impedance sensing for dual-power mode safety control" (2016, 유효 특허 ~2036)
+* US Patent US10104923B2 — Warwick Mills, Inc., "Proximity-sensing protective gloves and tool interlock" (2017, 연체료 미납 만료)
+* European Patent EP3432782A4 — "Hybrid bidirectional sensing glove and power tool safety apparatus" (2016)
+* US Patent US12025271 — "Material discrimination sensing using RF and capacitive elements for power tools" (최근 출원, 유효 특허)
+* US Patent US6479958B1 — "Anti-kickback and breakthrough torque control for power tool" (Home Depot/Black&Decker 계열, Hole Saw 명시적 언급)
+* US Patent US7552781B2 — "Power tool anti-kickback system with rotational rate sensor" (Black & Decker Inc., 회전 속도 센서 기반 킥백 차단 체계)
+* US Patent US9505097B2 / EP2497607B1 / EP2669061A1 — Hilti Aktiengesellschaft, "Power tool torque and grip sensing control architecture."
+* European Patent EP1881382A2 / US Patent US8316958B2 — Black & Decker Inc., "Adaptive control scheme for detecting and preventing torque conditions in power tools" (동일 기술군·우선일 인접 패밀리 특허)
+* US Patent US4487270A — "Adjustable mechanical torque limiting clutch mechanism for rotary power tools." (Expired)
+* Personal Protective Equipment Standards & Product Data — MAPA Ultrane 527 Specification Sheet; Ansell HyFlex 11-812 Technical Data Sheet (Tear-Away Glove Design Standards).
+
+### 8.4 저작권 및 라이선스 고지 (Copyright & License Notice)
+본 문서의 텍스트 표현물은 Creative Commons Attribution 4.0 International (CC BY 4.0)에 따라 공개되며, 저자(deundeuni / soma-moa)는 본 문서에 기술된 아이디어에 대해 어떠한 배타적 특허권도 주장하지 않는다. 상세 라이선스 조건은 본 저장소의 LICENSE 파일을 따른다.
